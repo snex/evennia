@@ -41,7 +41,7 @@ class XYZGrid(DefaultScript):
 
     @property
     def grid(self):
-        if self.ndb.grid is None:
+        if self.ndb.grid is None or self.ndb.grid == {}:
             self.reload()
         return self.ndb.grid
 
@@ -309,4 +309,5 @@ def get_xyzgrid(print_errors=True):
             print(err)
         else:
             xyzgrid.log(str(err))
+        raise err
     return xyzgrid

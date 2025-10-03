@@ -1,3 +1,5 @@
+import copy
+
 r"""
 # XYMap
 
@@ -914,7 +916,7 @@ class XYMap:
 
         if dist is None:
             # show the entire grid
-            gridmap = self.display_map
+            gridmap = copy.deepcopy(self.display_map)
             ixc, iyc = ix, iy
 
         elif dist is None or dist <= 0 or not self.get_node_from_coord(xy):
@@ -964,6 +966,9 @@ class XYMap:
             _, path = self.get_shortest_path(xy, target)
 
             maxstep = dist if mode == "nodes" else dist / 2
+            if not maxstep:
+                maxstep = 9999
+
             nsteps = 0
             for node_or_link in path[1:]:
                 if hasattr(node_or_link, "node_index"):

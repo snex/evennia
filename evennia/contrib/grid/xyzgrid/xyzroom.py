@@ -478,7 +478,7 @@ class XYZRoom(DefaultRoom):
             if map_area_client:
                 display_width = client_width
             else:
-                display_width = max(map_width, max(len(line) for line in room_desc.split("\n")))
+                display_width = min(map_width, max(len(line) for line in room_desc.split("\n")))
 
             # align map
             map_indent = 0
@@ -500,7 +500,8 @@ class XYZRoom(DefaultRoom):
                 target=target_xy,
                 target_path_style=map_target_path_style,
                 character=map_character_symbol,
-                max_size=(display_width, None),
+                #max_size=(display_width, None),
+                max_size=None,
                 indent=map_indent,
             )
             sep = map_separator_char * sep_width
