@@ -318,20 +318,20 @@ def _option_spawn(*suboptions):
     else:
         x, y, z = "*", "*", "*"
 
-    if x == y == z == "*":
-        inp = input(
-            "This will (re)spawn the entire grid. If it was built before, it may spawn \n"
-            "new rooms or delete rooms that no longer matches the grid.\nDo you want to "
-            "continue? [Y]/N? "
-        )
-    else:
-        inp = input(
-            "This will spawn/delete objects in the database matching grid coordinates \n"
-            f"({x},{y},{z}) (where '*' is a wildcard).\nDo you want to continue? [Y]/N? "
-        )
-    if inp.lower() in ("no", "n"):
-        print("Aborted.")
-        return
+    # if x == y == z == "*":
+    #     inp = input(
+    #         "This will (re)spawn the entire grid. If it was built before, it may spawn \n"
+    #         "new rooms or delete rooms that no longer matches the grid.\nDo you want to "
+    #         "continue? [Y]/N? "
+    #     )
+    # else:
+    #     inp = input(
+    #         "This will spawn/delete objects in the database matching grid coordinates \n"
+    #         f"({x},{y},{z}) (where '*' is a wildcard).\nDo you want to continue? [Y]/N? "
+    #     )
+    # if inp.lower() in ("no", "n"):
+    #     print("Aborted.")
+    #     return
 
     print("Starting spawn ...")
     grid.spawn(xyz=(x, y, z))
