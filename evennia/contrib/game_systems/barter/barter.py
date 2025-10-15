@@ -411,7 +411,7 @@ class CmdTradeBase(Command):
         self.trade_started = self.tradehandler.trade_started
         self.emote = ""
         self.str_caller = "Your trade action: %s"
-        self.str_other = "%s:s trade action: " % self.caller.key + "%s"
+        self.str_other = "%s's trade action: " % self.caller.key + "%s"
         if ":" in self.args:
             self.args, self.emote = [part.strip() for part in self.args.rsplit(":", 1)]
             self.str_caller = 'You say, "' + self.emote + '"\n  [%s]'
