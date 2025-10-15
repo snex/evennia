@@ -366,9 +366,9 @@ class TradeHandler(object):
         if self.trade_started and self.part_a_accepted and self.part_b_accepted:
             # both accepted - move objects before cleanup
             for obj in self.part_a_offers:
-                obj.location = self.part_b
+                obj.move_to(self.part_b)
             for obj in self.part_b_offers:
-                obj.location = self.part_a
+                obj.move_to(self.part_a)
             fin = True
         if fin or force:
             # cleanup
