@@ -338,6 +338,7 @@ class EvenniaCommandTestMixin:
         inputs=None,
         raw_string=None,
         use_assertequal=False,
+        stripmenu=True
     ):
         """
         Test a command by assigning all the needed properties to a cmdobj and
@@ -399,6 +400,7 @@ class EvenniaCommandTestMixin:
             use_assertequal (bool, optional): If `True`, the error message will use
                 a regular assertEqual. This will show show whitepace differences easier, but
                 doesn't allow for only matching against the start of the returned message.
+            stripmenu (bool, optional): If `True`, strip EvMenu characters from the output.
 
         Returns:
             str or dict: The message sent to `receiver`, or a dict of
@@ -528,10 +530,11 @@ class EvenniaCommandTestMixin:
                 # We remove Evmenu decorations since that just makes it harder
                 # to write the comparison string. We also strip ansi before this
                 # comparison since otherwise it would mess with the regex.
-                returned_msg = msg_sep.join(
-                    _RE_STRIP_EVMENU.sub("", ansi.parse_ansi(mess, strip_ansi=noansi))
-                    for mess in stored_msg
-                ).strip()
+                if stripmenu:
+                    returned_msg = msg_sep.join(
+                        _RE_STRIP_EVMENU.sub("", ansi.parse_ansi(mess, strip_ansi=noansi))
+                        for mess in stored_msg
+                    ).strip()
 
                 # this is the actual test
 
