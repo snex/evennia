@@ -527,12 +527,18 @@ class EvenniaCommandTestMixin:
                 # set our separator for returned messages based on parsing ansi or not
                 msg_sep = "|" if noansi else "||"
 
+                returned_msg = ""
                 # We remove Evmenu decorations since that just makes it harder
                 # to write the comparison string. We also strip ansi before this
                 # comparison since otherwise it would mess with the regex.
                 if stripmenu:
                     returned_msg = msg_sep.join(
                         _RE_STRIP_EVMENU.sub("", ansi.parse_ansi(mess, strip_ansi=noansi))
+                        for mess in stored_msg
+                    ).strip()
+                else:
+                    returned_msg = msg_sep.join(
+                        ansi.parse_ansi(mess, strip_ansi=noansi)
                         for mess in stored_msg
                     ).strip()
 
